@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="h2-container">
+    <h2>STEP 2: 質問と選択肢の追加</h2>
+</div>
+<p class="text-center h5 mb-5 text-secondary">「{{ survey.title }}」を作成中...</p>
+
+
+<div class="row justify-content-center">
+    <div class="col-lg-6 mb-5">
+        <div class="card shadow-sm border-0" style="background-color: #f9fff0; border-left: 5px solid var(--brand-color) !important;">
+            <div class="card-body p-4">
+                <h4 class="card-title fw-bold mb-4 text-center" style="color: var(--brand-color);">質問を追加する</h4>
+                <form method="post">
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">質問文:</label>
+                        <input type="text" name="question_text" class="form-control" required placeholder="例: 開催時期はいつが良いですか？">
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">選択肢 (カンマ「,」区切り):</label>
+                        <textarea name="choices" class="form-control" rows="3" required placeholder="例: 4月, 5月, 6月, いつでも良い"></textarea>
+                        <div class="form-text">複数の選択肢をカンマ(,)で区切って入力してください。</div>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-brand shadow-sm">＋ この質問を追加する</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <h4 class="fw-bold text-center mb-4">登録済みの質問リスト</h4>
+        <div class="vstack gap-3">
+            {% for q in survey.questions %}
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">Q. {{ q.text }}</h5>
+                        <ul class="list-inline mb-0 mt-3 ps-3" style="border-left: 3px solid #eee;">
+                            {% for c in q.choices %}
+                                <li class="list-inline-item badge bg-secondary bg-opacity-10 text-dark fw-normal p-2 me-2 mb-2">
+                                    {{ c.text }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% else %}
+                <div class="text-center text-muted p-4 card border-0 bg-light">
+                    まだ質問が登録されていません。左のフォームから追加してください。
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="text-center mt-5 pt-4 border-top">
+    <p class="mb-3">全ての質問を追加し終えたら、作成を完了してください。</p>
+    <a href="/" class="btn btn-success btn-lg px-5 shadow" style="background-color: #28a745;">
+        ✔ 作成を完了してトップへ戻る
+    </a>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="h2-container">
+    <h2>ユーザ登録</h2>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <p class="text-center text-muted mb-4">お名前とメールアドレスを入力して登録してください。</p>
+        
+        <form method="post" class="mb-5">
+            <div class="mb-4">
+                <label class="form-label fw-bold">お名前:</label>
+                <input type="text" name="name" class="form-control form-control-lg" required placeholder="山田 太郎">
+            </div>
+            <div class="mb-4">
+                <label class="form-label fw-bold">メールアドレス:</label>
+                <input type="email" name="email" class="form-control form-control-lg" required placeholder="example@email.com">
+            </div>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-brand btn-lg shadow">登録してはじめる</button>
+            </div>
+        </form>
+        
+        <div class="text-center">
+            <a href="/" class="btn btn-outline-secondary">トップページへ戻る</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

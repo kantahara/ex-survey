@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>📝 {{ survey.title }} に回答</h2>
+
+<form method="post">
+    {% for question in survey.questions %}
+        <div style="margin-bottom: 20px; border:1px solid #eee; padding:10px;">
+            <p><strong>Q{{ loop.index }}. {{ question.text }}</strong></p>
+            {% for choice in question.choices %}
+                <label style="display:block; margin-bottom:5px;">
+                    <input type="radio" name="q_{{ question.id }}" value="{{ choice.id }}" required>
+                    {{ choice.text }}
+                </label>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    
+    <button type="submit" class="btn" style="font-size:1.2em;">回答を送信する</button>
+</form>
+{% endblock %}

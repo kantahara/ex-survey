@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="h2-container">
+    <h2>集計結果</h2>
+</div>
+<p class="text-center h4 mb-5 fw-bold" style="color: var(--brand-color);">「{{ survey.title }}」</p>
+
+<div class="row justify-content-center">
+    <div class="col-md-9">
+        {% for q_id, choices in results.items() %}
+            {% set question = survey.questions | selectattr("id", "equalto", q_id) | first %}
+            
+            <div class="card mb-5 shadow-sm border-0 overflow-hidden">
+                <div class="card-header p-3 text-white" style="background-color: var(--brand-color-dark);">
+                    <h5 class="mb-0 fw-bold">Q. {{ question.text }}</h5>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-hover mb-0 align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="ps-4" style="width: 70%;">選択肢</th>
+                                <th class="text-center">獲得票数</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in choices %}
+                            <tr>
+                                <td class="ps-4 py-3 fs-5">{{ item.text }}</td>
+                                <td class="text-center py-3">
+                                    <span class="badge rounded-pill bg-success fs-5 px-4 py-2 shadow-sm" style="background-color: var(--brand-color) !important;">
+                                        {{ item.count }} 票
+                                    </span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="text-center mt-5">
+            <a href="/" class="btn btn-outline-secondary btn-lg px-4">
+                トップページへ戻る
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

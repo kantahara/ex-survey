@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Webアンケートシステム</title>
+    <style>
+        body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        header { border-bottom: 2px solid #ddd; padding-bottom: 10px; margin-bottom: 20px; }
+        nav a { margin-right: 15px; text-decoration: none; color: #333; font-weight: bold;}
+        .btn { padding: 5px 10px; background: #007bff; color: white; border: none; cursor: pointer; text-decoration: none;}
+        input[type="text"], input[type="email"], input[type="number"] { padding: 5px; width: 300px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>アンケートシステム</h1>
+        <nav>
+            <a href="/">🏠 ホーム</a>
+            {% if session.get('user_id') %}
+                <span>ログイン中 (ID: {{ session.get('user_id') }})</span>
+                <a href="/logout">ログアウト</a>
+            {% else %}
+                <a href="/register">ユーザ登録</a>
+            {% endif %}
+        </nav>
+    </header>
+    
+    {% block content %}{% endblock %}
+</body>
+</html>

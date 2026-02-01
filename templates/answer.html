@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="h2-container">
+    <h2>アンケート回答</h2>
+</div>
+<p class="text-center h4 mb-5 fw-bold" style="color: var(--brand-color);">「{{ survey.title }}」</p>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <form method="post">
+            {% for question in survey.questions %}
+                <div class="card mb-4 shadow-sm border-0">
+                    <div class="card-header bg-white border-bottom-0 pt-4 px-4">
+                        <h5 class="fw-bold mb-0">Q{{ loop.index }}. {{ question.text }}</h5>
+                    </div>
+                    <div class="card-body px-4 pb-4">
+                        <div class="list-group">
+                            {% for choice in question.choices %}
+                                <label class="list-group-item list-group-item-action border-0 rounded mb-2 p-3 d-flex align-items-center" style="background-color: #f8f9fa; cursor: pointer;">
+                                    <input class="form-check-input me-3 mt-0" type="radio" name="q_{{ question.id }}" value="{{ choice.id }}" required style="width: 1.3em; height: 1.3em; border-color: var(--brand-color);">
+                                    <span class="fs-5">{{ choice.text }}</span>
+                                </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            
+            <div class="text-center mt-5">
+                <button type="submit" class="btn btn-brand btn-lg px-5 shadow-lg">
+                    回答を送信する
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

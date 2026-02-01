@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webアンケートシステム</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* カスタムカラー定義 */
+        :root {
+            --brand-color: #a2d200; /* 黄緑色 */
+            --brand-color-dark: #8ab300; /* 少し暗い黄緑（ホバー用） */
+        }
+
+        body {
+            background-color: #f4f7f6; /* 背景を薄いグレーに */
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        /* メインコンテンツを中央寄せの白いボックスにする */
+        .main-container {
+            background-color: #ffffff;
+            border-radius: 15px; /* 角丸 */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); /* 影をつけて浮かせる */
+            padding: 40px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            max-width: 900px; /* 横幅が広がりすぎないように */
+        }
+
+        /* ナビゲーションバー */
+        .navbar-custom {
+            background-color: var(--brand-color) !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .navbar-brand, .nav-link {
+            color: white !important;
+            font-weight: bold;
+        }
+
+        /* 見出し */
+        h2 {
+            color: #444;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--brand-color);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        .h2-container { text-align: center; } /* h2を中央寄せするためのラッパー */
+
+        /* メインボタン（黄緑色） */
+        .btn-brand {
+            background-color: var(--brand-color);
+            border: none;
+            color: white;
+            font-weight: bold;
+            padding: 12px 30px;
+            border-radius: 30px; /* 丸っこいボタン */
+            transition: all 0.3s;
+        }
+        .btn-brand:hover {
+            background-color: var(--brand-color-dark);
+            color: white;
+            transform: translateY(-2px); /* ホバー時に少し浮く */
+            box-shadow: 0 5px 15px rgba(162, 210, 0, 0.4);
+        }
+        
+        /* サブボタン（枠線のみ） */
+        .btn-outline-brand {
+            color: var(--brand-color);
+            border: 2px solid var(--brand-color);
+            font-weight: bold;
+            border-radius: 30px;
+            padding: 10px 25px;
+        }
+        .btn-outline-brand:hover {
+            background-color: var(--brand-color);
+            color: white;
+        }
+
+        /* フォーム入力欄を見やすく */
+        .form-control {
+            padding: 12px;
+            border-radius: 10px;
+            border: 2px solid #eee;
+        }
+        .form-control:focus {
+            border-color: var(--brand-color);
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand navbar-custom">
+        <div class="container">
+            <a class="navbar-brand" href="/">📋 アンケートシステム</a>
+            <div class="ms-auto d-flex align-items-center">
+                {% if session.get('user_id') %}
+                    <span class="text-white me-3">👤 ID: {{ session.get('user_id') }} でログイン中</span>
+                    <a href="/logout" class="btn btn-sm btn-light text-success fw-bold">ログアウト</a>
+                {% else %}
+                    <a href="/register" class="btn btn-sm btn-light text-success fw-bold">ユーザ登録</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container d-flex justify-content-center">
+        <div class="main-container col-12">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
